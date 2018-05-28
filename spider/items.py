@@ -7,8 +7,11 @@
 
 import scrapy
 
-
-class SpiderItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+class SmartContractItem(scrapy.Item):
+    
+    # 合约token
+    token = scrapy.Field()
+    # 合约name
+    name  = scrapy.Field()
+    # 合约代码
+    code  = scrapy.Field()
