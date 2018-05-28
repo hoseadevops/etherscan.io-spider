@@ -14,14 +14,14 @@ class SpiderPipeline(object):
         return item
 
 class SolPipeLine(object):
-    project_dir = os.path.abspath(os.path.dirname(__file__))
-    IMAGES_STORE = os.path.join(project_dir, 'images')
-
+   
     def process_item(self, item, spider):
-        folder = os.getcwd()[:-4] + 'code\\'
+        folder = os.getcwd() + '/code/'
         if not os.path.exists(folder):
             os.makedirs(folder)
-        self.file = codecs.open(folder + item['name'] + '.sol', "w", encoding="utf-8")
+        print('目录地址：' + folder); 
+
+        self.file = codecs.open(folder + '/' + item['name'] + '.sol', "w", encoding="utf-8")
         content = item['code']
         self.file.write(content)
         print("run here hosea")

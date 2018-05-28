@@ -35,10 +35,8 @@ class SmartContractSpider(scrapy.Spider):
         item['code']          = response.xpath('//*[@id="editor"]/text()').extract_first()
         
         print(item)
-
+        
         yield item
-
-        return item
         
 
         
