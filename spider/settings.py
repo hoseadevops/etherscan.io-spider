@@ -77,12 +77,10 @@ DOWNLOADER_MIDDLEWARES = {
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-TEM_PIPELINES = {
-#    'spider.pipelines.SpiderPipeline': 300,
-     'scrapy.pipelines.files.FilesPipeline': 2, 
-}
 
-FILES_STORE='examples_src'
+ITEM_PIPELINES = {
+    'spider.pipelines.SolPipeLine': 1,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
