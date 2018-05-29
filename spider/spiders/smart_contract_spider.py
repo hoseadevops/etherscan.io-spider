@@ -1,4 +1,6 @@
 import scrapy
+from scrapy import log
+import logging
 
 from spider.items import SmartContractItem
 
@@ -8,7 +10,7 @@ class SmartContractSpider(scrapy.Spider):
 
     base_url       = "https://etherscan.io/"
 
-    token_max_page = 2
+    token_max_page = 12
 
     def start_requests(self):
         for p in range(1, self.token_max_page):
@@ -22,20 +24,20 @@ class SmartContractSpider(scrapy.Spider):
             token         = token_str.split("/")[2]
             sub_url       = self.base_url + '/address/'+ token + '#code'
 
-            yield scrapy.Request(sub_url, self.parseCode) 
-
-            print(token)
+            yield scrapy.Request(sub_url, self.parseCode)   
         
 
     def parseCode(self, response):
         item                  = SmartContractItem()
 
-        item['name']          = response.xpath('//*[@id="ContentPlaceHolder1_divSummary"]/div[1]/table/thead/tr/th/font/text()').extract_first()
+        name                  = response.xpath('//*[@id="ContentPlaceHolder1_tr_tokeninfo"]/td[2]/a/text()').extract_first()
+        name                  = name.replace(' ','').replace(')','')
         item['token']         = response.xpath('//*[@id="mainaddress"]/text()').extract_first() 
+        item['name']          = name.split('(')[0] + '_' + name.split('(')[1] + '_' + item['token']
         item['code']          = response.xpath('//*[@id="editor"]/text()').extract_first()
-        
-        print(item)
-        
+
+        log.msg('token: ' + item['token'] +'\n' + 'name：' + item['name'], level=logging.DEBUG)
+
         yield item
         
 

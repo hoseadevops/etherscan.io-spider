@@ -65,7 +65,7 @@ DEFAULT_REQUEST_HEADERS = {
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
    'spider.useragent.UserAgent': 1,
-   'spider.proxymiddlewares.ProxyMiddleware':100,
+    # 'spider.proxymiddlewares.ProxyMiddleware':100,
    'scrapy.downloadermiddleware.useragent.UserAgentMiddleware' : None,
 }
 
