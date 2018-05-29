@@ -23,8 +23,9 @@ class SolPipeLine(object):
 
         self.file = codecs.open(folder + '/' + item['name'] + '.sol', "w", encoding="utf-8")
         content = item['code']
-        self.file.write(content)
-        return item
+        if content:
+            self.file.write(content)
+            return item
 
     def close_spider(self):
         self.file.close()
