@@ -8,10 +8,15 @@
 import scrapy
 
 class SmartContractItem(scrapy.Item):
-    
-    # 合约token
+
+    # 合约 token
     token = scrapy.Field()
-    # 合约name
+
+    # token 标识
     name  = scrapy.Field()
-    # 合约代码
+
+    # 合约 名
+    contract = scrapy.Field()
+
+    # 合约 代码
     code  = scrapy.Field()
