@@ -1,5 +1,5 @@
 import scrapy
-from scrapy import log
+# from scrapy import log
 import logging
 
 from spider.items import SmartContractItem
@@ -19,7 +19,7 @@ class SmartContractSpider(scrapy.Spider):
 
     def parseToken(self, response):
 
-        for each in response.xpath('//h5'):
+        for each in response.xpath('//h3'):
             token_str     = each.xpath('./a/@href').extract_first()
             token         = token_str.split("/")[2]
             sub_url       = self.base_url + 'address/'+ token + '#code'
@@ -38,6 +38,6 @@ class SmartContractSpider(scrapy.Spider):
         item['name']          = name.split('(')[0] + '_' + name.split('(')[1] + '_' + item['token']
 
 
-        log.msg('token: ' + item['token'] + '\n' + 'name：' + item['name'], level=logging.DEBUG)
+        logging.log(logging.DEBUG, 'token: ' + item['token'] + '\n' + 'name：' + item['name'])
 
         yield item
